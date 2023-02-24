@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for product in products %}
+<div class="row">
+    <div class="col-2 d-flex justify-content-center" style="height: 100px;" onclick="window.location='{% url 'hunt:details' product.id %}';">
+        <img src="{{ product.icon.url }}" class="img-fluid" style="height: 100%; width: 100%; object-fit: contain;" />
+    </div>
+    <div class="col-10">
+        <div class="row">
+            <div class="col-9" style="height: 50px;" onclick="window.location='{% url 'hunt:details' product.id %}';"><h1>{{ product.title }}</h1></div>
+            <div class="col-3" style="height: 50px;"><a href="javascript:{document.getElementById('esteem{{ product.id }}').submit()}"><h2><button type="button" class="btn btn-warning fw-bold">{{ product.votes }}𐌣 Esteem!</button></h2></a></div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="height: 50px;" onclick="window.location='{% url 'hunt:details' product.id %}';">{{ product.short_body }}</div>
+        </div>
+    </div>
+</div>
+
+<form method="POST" id="esteem{{ product.id }}" action="{% url 'hunt:esteem' product.id %}">
+    {% csrf_token %}
+    <input type="hidden">
+</form>
+
+{% endfor %}
+{% endblock %}

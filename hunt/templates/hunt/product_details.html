@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-3" style="height: 100px;"><img src="{{ product.icon.url }}" class="img-fluid" style="height: 100%; width: 100;" /></div>
+    <div class="col-9">
+        <div class="row">
+            <div class="col-9" style="height: 50px;"><h1>{{ product.title }}</h1></div>
+            <div class="col-3" style="height: 50px;"><a href="javascript:{document.getElementById('esteem').submit()}"><h2><button type="button" class="btn btn-warning fw-bold">{{ product.votes }}𐌣 Esteem!</button></h2></a></div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="height: 50px;">{{ product.body_begin }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <p>{{ product.body_rest }}</p>
+    </div>
+</div>
+
+<div class="row" style="height: 300px;">
+    <div class="col-12">
+        <p style="text-align: center;"><a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="img-fluid" style="height: 300px; width: 100;" /></a></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <p style="margin: 0; font-weight: bold;">Publication date: {{ product.pub_date }}</p>
+        <p style="margin: 0; font-weight: bold;">Added by: {{ product.creator }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a href="{{ product.url }}" style="text-decoration: none;">Go to the product page!</a>
+    </div>
+    <div class="col-6">
+        <p style="text-align: right;"><a href="{% url 'hunt:homepage' %}" style="text-decoration: none;">Go to the main page...</a></p>
+    </div>
+</div>
+
+<form method="POST" id="esteem" action="{% url 'hunt:esteem' product.id %}">
+    {% csrf_token %}
+    <input type="hidden">
+</form>
+{% endblock %}

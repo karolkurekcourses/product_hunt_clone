@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+<p style="color: red">{{ error }}</p>
+
+{% endif %}
+
+<h1>Add product!</h1>
+<form method="POST" action="{% url 'hunt:create' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    Title:<br />
+    <input type="text" class="form-control w-25" name="title" placeholder="title" /><br />
+
+    Body:<br />
+    <textarea name="body" class="form-control w-25" placeholder="body"></textarea><br />
+
+    Short body:<br />
+    <textarea name="short_body" class="form-control w-25" placeholder="in shorts..."></textarea><br />
+
+    URL:<br />
+    <input type="text" class="form-control w-25" name="url" placeholder="url" /><br />
+
+    Icon:<br />
+    <input type="file" class="form-control w-25" name="icon"/><br />
+
+    Image:<br />
+    <input type="file" class="form-control w-25" name="image"/><br />
+
+    <input type="submit" class="btn btn-primary" value="Add product!" />
+</form>
+{% endblock %}

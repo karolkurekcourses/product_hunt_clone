@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Hunt Clone</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+  <style>
+    .nav-link {
+      color: #898989;
+    }
+    .nav-link:hover {
+      color: black;
+    }
+    .nav-link:focus {
+      outline: thin dotted;
+      color: initial;
+    }
+
+    .active {
+      color: black;
+    }
+  </style>
+  </head>
+  <body>
+
+<header class="p-3 text-bg-light">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+          <img src="{% static 'phc-logo.png' %}" alt="Logo" />
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'hunt:homepage' %}" class="nav-link px-2 active">Home</a></li>
+          <li><a href="#" class="nav-link px-2">About</a></li>
+        </ul>
+
+        <div class="text-end">
+          {% if request.user.is_authenticated %}
+          Logged as {{ request.user }}
+          <a href="javascript:{document.getElementById('logout').submit()}"><button type="button" class="btn btn-outline-dark me-2">Logout</button></a>
+          <a href="{% url 'hunt:create' %}"><button type="button" class="btn btn-warning">Add Product</button></a>
+          <form id="logout" method="POST" action="{% url 'account:logout' %}">
+            {% csrf_token %}
+            <input type="hidden">
+          </form>
+          {% else %}
+          <a href="{% url 'account:login' %}"><button type="button" class="btn btn-outline-dark me-2">Login</button></a>
+          <a href="{% url 'account:signup' %}"><button type="button" class="btn btn-warning">Sign-up</button></a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+<div class="container">
+{% block content %}
+{% endblock %}
+</div>
+
+<br />
+<div class="container">
+  <footer class="py-3 my-4">
+    <p class="text-center text-muted">© {% now "Y" %} Product Hunt Clone</p>
+  </footer>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+<p style="color: red">{{ error }}</p>
+
+{% endif %}
+
+<h1>Login!</h1>
+<form method="POST" action="{% url 'account:login' %}">
+    {% csrf_token %}
+    Username or e-mail address:<br />
+    <input type="text" class="form-control w-25" name="username_or_email" placeholder="Your username or email" /><br />
+
+    Password:<br />
+    <input type="password" class="form-control w-25" name="password" placeholder="Your password" /><br />
+
+    <input type="submit" class="btn btn-primary" value="Login!" />
+</form>
+{% endblock %}
