@@ -25,3 +25,7 @@ urlpatterns = [
     path('api/', include(('api.urls', 'api'), namespace='api')),
     path('api-auth', include('rest_framework.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+try:
+    from .local_urls import *
+except ImportError:
+    print("Jesteś na swoim komputerze lokalnym")
